@@ -22,7 +22,7 @@ def get_rfc_n_estimators_df(X, y, dataset_name: str):
 def get_rfc_n_samples_df(X, y, dataset_name: str):
     scores = [
         get_classifier_scores(RandomForestClassifier(max_samples=samples), X=X, y=y, classifier_name="bagging", dataset_name=dataset_name, custom_columns={"samples": samples})
-        for samples in [0.05, 0.2, 0.5, 0.8, 1.0]
+        for samples in [0.05, 0.2, 0.5, 0.8, 0.95]
     ]
     return pd.concat(scores)
 
