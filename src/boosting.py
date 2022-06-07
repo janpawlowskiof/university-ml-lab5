@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 from src.base import get_classifier_scores
 
@@ -7,7 +8,7 @@ from src.base import get_classifier_scores
 def get_boosting_n_estimators_df(X, y, dataset_name: str):
     scores = [
         get_classifier_scores(
-            AdaBoostClassifier(n_estimators=n_estimators),
+            AdaBoostClassifier(DecisionTreeClassifier(max_depth=2), n_estimators=n_estimators),
             X=X,
             y=y,
             classifier_name="boosting",
@@ -22,7 +23,7 @@ def get_boosting_n_estimators_df(X, y, dataset_name: str):
 def get_boosting_lr_df(X, y, dataset_name: str):
     scores = [
         get_classifier_scores(
-            AdaBoostClassifier(learning_rate=learning_rate),
+            AdaBoostClassifier(DecisionTreeClassifier(max_depth=2), learning_rate=learning_rate),
             X=X,
             y=y,
             classifier_name="boosting",

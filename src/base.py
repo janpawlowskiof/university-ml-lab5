@@ -37,10 +37,13 @@ def get_classifier_scores(classifier, X, y, classifier_name: str, dataset_name: 
 def plot_scores(scores: List[pd.DataFrame], x_key: str, suptitle: str):
     df = pd.concat(scores)
     datasets = df["dataset"].unique()
-    fig, axs = plt.subplots(1, len(datasets), figsize=(len(datasets) * 8, 8))
+    fig, axs = plt.subplots(2, len(datasets), figsize=(len(datasets) * 8, 2 * 8))
     for dataset_index, dataset_name in enumerate(datasets):
         dataset_df = df[df["dataset"] == dataset_name]
-        ax = axs[dataset_index]
+        ax = axs[0, dataset_index]
         sns.boxplot(data=dataset_df, y="test_score", x=x_key, ax=ax).set_title(dataset_name)
+
+        ax = axs[1, dataset_index]
+        sns.boxplot(data=dataset_df, y="score_time", x=x_key, ax=ax).set_title(dataset_name)
     fig.suptitle(suptitle, fontsize=16)
     plt.show()
